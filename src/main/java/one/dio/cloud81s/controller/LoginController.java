@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {
-
+    // https://priceapi-live.herokuapp.com/api/v1/login
     @GetMapping
     public String getLogin(){
         return "Init Api";
