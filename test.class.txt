@@ -1,0 +1,39 @@
+import java.util.*;
+import java.lang.String;
+
+public class solution
+{
+   public static void main(String[] args)
+   {
+       int arr1 [] ={1,2,3,4,6};
+       int pivot_index = balancedSum(arr1);
+       System.out.print("\nThe pivot index for arr1 is: " + pivot_index+"\n");
+
+       int arr2 [] ={10, 5, 5, 1, 9, 3, 1, 2 , 15};
+       pivot_index = balancedSum(arr2);
+       System.out.print("\nThe pivot index for arr2 is: " + pivot_index+"\n");
+   }
+
+   public static int balancedSum(int [] array) //returns pivot index for array
+   {
+       int leftptr = 0; //declare leftptr and rightptr
+       int rightptr = array.length-1;   
+       int left_sum = array[leftptr]; //initialize left sum to first element
+       int right_sum = array[rightptr]; //initialize left sum to last element
+       while(rightptr - leftptr != 2) //do until there is one element between both pointers
+       {
+           if(left_sum <= right_sum){ //if left sum is less, increment leftptr and increase sum
+               leftptr++;
+               left_sum = left_sum + array[leftptr];
+           }
+           else{ //if right sum is less, decrement rightptr and decrease sum
+               rightptr--;
+               right_sum = right_sum + array[rightptr];
+           }
+       }
+       if(left_sum == right_sum) //if only one element exists in between and both sums are equal, then return pivot
+           return (leftptr+1);
+       else
+           return -1; //else return -1
+   }
+}
