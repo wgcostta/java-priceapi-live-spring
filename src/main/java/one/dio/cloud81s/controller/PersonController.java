@@ -1,6 +1,7 @@
 package one.dio.cloud81s.controller;
 
 import lombok.AllArgsConstructor;
+import one.dio.cloud81s.exception.PersonNotFoundException;
 import one.dio.cloud81s.service.PersonService;
 import one.dio.cloud81s.dto.request.PersonDTO;
 import one.dio.cloud81s.entity.MessageResponseDTO;
@@ -27,6 +28,11 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> listAll(){
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long Id) throws PersonNotFoundException {
+        return personService.findById(Id);
     }
 
 }
