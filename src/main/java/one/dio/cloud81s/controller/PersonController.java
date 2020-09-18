@@ -41,6 +41,15 @@ public class PersonController {
         personService.delete(id);
     }
 
+    @PutMapping("/{id}")
+    public MessageResponseDTO update(
+            @PathVariable Long id,
+            @RequestBody PersonDTO personDTO)
+            throws PersonNotFoundException {
+        return personService.update(id, personDTO);
+    }
+
+
 }
 // https://priceapi-live.herokuapp.com/api/v1/login
 /*
