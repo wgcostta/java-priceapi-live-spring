@@ -1,4 +1,4 @@
-package one.dio.cloud81s.enums;
+package one.dio.cloud81s.dto.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

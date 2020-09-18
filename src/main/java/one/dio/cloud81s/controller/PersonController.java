@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import one.dio.cloud81s.exception.PersonNotFoundException;
 import one.dio.cloud81s.service.PersonService;
 import one.dio.cloud81s.dto.request.PersonDTO;
-import one.dio.cloud81s.entity.MessageResponseDTO;
+import one.dio.cloud81s.dto.response.MessageResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

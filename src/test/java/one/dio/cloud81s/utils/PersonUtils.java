@@ -1,7 +1,9 @@
-package one.digitalinnovation.personapi.utils;
+package one.dio.cloud81s.utils;
 
-import one.digitalinnovation.personapi.dto.request.PersonDTO;
-import one.digitalinnovation.personapi.entities.Person;
+
+
+import one.dio.cloud81s.dto.request.PersonDTO;
+import one.dio.cloud81s.entity.Person;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -26,7 +28,7 @@ public class PersonUtils {
 
     public static Person createFakeEntity() {
         return Person.builder()
-                .id(PERSON_ID)
+                .Id(PERSON_ID)
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)
                 .cpf(CPF_NUMBER)
