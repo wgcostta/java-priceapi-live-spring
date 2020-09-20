@@ -2,16 +2,15 @@ package one.dio.cloud81s.service;
 
 import lombok.AllArgsConstructor;
 import one.dio.cloud81s.dto.request.PersonDTO;
-import one.dio.cloud81s.entity.MessageResponseDTO;
+import one.dio.cloud81s.dto.response.MessageResponseDTO;
 import one.dio.cloud81s.entity.Person;
 import one.dio.cloud81s.exception.PersonNotFoundException;
-import one.dio.cloud81s.mapper.PersonMapper;
+import one.dio.cloud81s.dto.mapper.PersonMapper;
 import one.dio.cloud81s.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,10 +24,7 @@ public class PersonService {
         Person personToSave = personMapper.toModel(personDTO);
 
         Person savedPerson = personRepository.save(personToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Created person with ID: " + savedPerson.getId())
-                .build();
+        return createdMessageResponse( "Created person with ID: " + savedPerson.getId());
     }
 
     public List<PersonDTO> listAll() {
@@ -39,12 +35,36 @@ public class PersonService {
     }
 
     public PersonDTO findById(Long id) throws PersonNotFoundException {
-        Optional<Person> optionalPerson = personRepository.findById(id);
+        Person person = verifyIfExistis(id);
+        return personMapper.toDTO(person);
+    }
 
-        if(optionalPerson.isEmpty()){
-            throw new PersonNotFoundException(id);
-        }
-        return personMapper.toDTO(optionalPerson.get());
+    public void delete(Long id) throws PersonNotFoundException {
+        verifyIfExistis(id);
 
+        personRepository.deleteById(id);
+    }
+
+    public MessageResponseDTO update(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExistis(id);
+
+        Person personToUpdate = personMapper.toModel(personDTO);
+
+        Person updatePerson = personRepository.save(personToUpdate);
+        return createdMessageResponse("Update person with ID: " + updatePerson.getId());
+    }
+
+    //Criar método Path
+
+    private Person verifyIfExistis(Long id) throws PersonNotFoundException {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+    }
+
+    private MessageResponseDTO createdMessageResponse(String sMessage) {
+        return MessageResponseDTO
+                .builder()
+                .message(sMessage)
+                .build();
     }
 }

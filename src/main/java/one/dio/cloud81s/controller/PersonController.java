@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import one.dio.cloud81s.exception.PersonNotFoundException;
 import one.dio.cloud81s.service.PersonService;
 import one.dio.cloud81s.dto.request.PersonDTO;
-import one.dio.cloud81s.entity.MessageResponseDTO;
+import one.dio.cloud81s.dto.response.MessageResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +34,21 @@ public class PersonController {
     public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
         return personService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) throws PersonNotFoundException {
+        personService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO update(
+            @PathVariable Long id,
+            @RequestBody PersonDTO personDTO)
+            throws PersonNotFoundException {
+        return personService.update(id, personDTO);
+    }
+
 
 }
 // https://priceapi-live.herokuapp.com/api/v1/login

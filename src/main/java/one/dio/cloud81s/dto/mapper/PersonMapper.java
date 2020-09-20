@@ -1,4 +1,4 @@
-package one.dio.cloud81s.mapper;
+package one.dio.cloud81s.dto.mapper;
 
 import one.dio.cloud81s.dto.request.PersonDTO;
 import one.dio.cloud81s.entity.Person;

@@ -1,4 +1,4 @@
-package one.dio.cloud81s.entity;
+package one.dio.cloud81s.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
