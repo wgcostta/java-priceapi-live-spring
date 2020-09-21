@@ -2,6 +2,9 @@ package one.dio.cloud81s;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class Cloud81sApplication {
@@ -10,4 +13,13 @@ public class Cloud81sApplication {
 		SpringApplication.run(Cloud81sApplication.class, args);
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*");
+			}
+		};
+	}
 }
